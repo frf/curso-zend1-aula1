@@ -1,5 +1,5 @@
-curso-zend1
-===========
+Curso Zend Módulo 1
+====================
 
 Curso de Zend 1
 
