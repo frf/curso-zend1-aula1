@@ -9,7 +9,10 @@ Curso de Zend 1
 
 2 - Conexao Banco de Dados
   - Configuração Arquivo INI
+  - Criar Banco de Dados (usuario)
+  - Pupular com este sql >  docs/usuario.sql
   - Exibir informações do banco de dados
+  
 
 3 - Cadastrar Usuário
 
