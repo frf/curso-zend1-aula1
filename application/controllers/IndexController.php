@@ -12,6 +12,23 @@ class IndexController extends Zend_Controller_Action
     {
         // action body
     }
+    public function dbAction()
+    {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+        
+        $db = Zend_Db_Table::getDefaultAdapter();
+        
+        print "<pre>";
+        
+        $select = $db->select();
+        $select->from('usuario');
+        
+        $rows = $db->fetchAll($select);
+        
+        var_dump($rows);
+        
+    }
 
 
 }
