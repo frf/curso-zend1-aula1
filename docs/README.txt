@@ -14,13 +14,13 @@ Setting Up Your VHOST
 The following is a sample VHOST you might want to consider for your project.
 
 <VirtualHost *:80>
-   DocumentRoot "/var/www/curso/ZendFramework-1.12.3-minimal/bin/aula1/public"
-   ServerName aula1.local
+   DocumentRoot "/var/www/ZendFramework-1.12.3-minimal/bin/curso/public"
+   ServerName curso.local
 
    # This should be omitted in the production environment
    SetEnv APPLICATION_ENV development
 
-   <Directory "/var/www/curso/ZendFramework-1.12.3-minimal/bin/aula1/public">
+   <Directory "/var/www/ZendFramework-1.12.3-minimal/bin/curso/public">
        Options Indexes MultiViews FollowSymLinks
        AllowOverride All
        Order allow,deny

@@ -29,10 +29,8 @@
     }
 </style>
 <div id="welcome">
-    <h1>Welcome to the <span id="zf-name">Zend Framework!</span></h1>
-
-    <h3><?php  #print_r($this->arrayTeste); ?></h3>
-
+    <h1>Listar Usuário</h1>
+    <a href="/usuario/cadastrar">[CADASTRAR]</a> 
     <div id="more-information">
         <table>
             <tr>
@@ -51,8 +49,8 @@
                     <td><?php echo $aValue['nome'];?></td>
                     <td><?php echo $aValue['login'];?></td>
                     <td><?php echo $aValue['senha'];?></td>
-                    <td><a href="/index/editar/id/<?php echo $aValue['id'];?>">[EDITAR]</a> 
-                    <a href="/index/excluir/id/<?php echo $aValue['id'];?>">[EXCLUIR]</a></td>
+                    <td><a href="/usuario/editar/id/<?php echo $aValue['id'];?>">[EDITAR]</a> 
+                    <a href="/usuario/excluir/id/<?php echo $aValue['id'];?>">[EXCLUIR]</a></td>
                 </tr>            
                 <?
                 }
