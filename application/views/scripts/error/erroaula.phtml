@@ -1,0 +1,9 @@
+  
+  <h3>Exception information:</h3>
+  <p>
+      <b>Code:</b> <?php echo $this->exception->getCode() ?><br>
+      <b>File:</b> <?php echo $this->exception->getFile() ?><br>
+      <b>Line:</b> <?php echo $this->exception->getLine() ?><br>
+      <b>Trace:</b> <?php #print_r($this->exception->getTrace()) ?><br>
+      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+  </p>
