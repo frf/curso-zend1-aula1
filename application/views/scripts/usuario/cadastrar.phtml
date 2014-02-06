@@ -1,0 +1,49 @@
+<style>
+    a:link,
+    a:visited
+    {
+        color: #0398CA;
+    }
+
+    span#zf-name
+    {
+        color: #91BE3F;
+    }
+
+    div#welcome
+    {
+        color: #000000;
+        width:  600px;
+        height: 400px;
+        border: 2px solid #444444;
+        overflow: hidden;
+        text-align: center;
+    }
+    table tr td{ padding: 10px;}
+    table tr{ font-size: 15px;}
+
+    div#more-information
+    {
+        
+        height: 100%;
+    }
+</style>
+<div id="welcome">
+    <h1><?php echo $this->titulo_pagina; ?></h1>
+
+
+    <form action=""  method="POST">
+
+        <input type="hidden" name="id">
+        <label>Nome:</label><input type="text" name="nome" value="<?php echo $this->nome; ?>"><br>
+        <label>Login:</label><input type="text" name="login" value="<?php echo $this->login; ?>"><br>
+        <label>Senha:</label><input type="password" name="senha" value="<?php echo $this->senha; ?>"><br>
+        <input type="submit" value="Salvar">
+        
+    </form>
+
+    <div id="more-information">
+        
+        <a href="/usuario/listar">[VOLTAR]</a>
+    </div>
+</div>
