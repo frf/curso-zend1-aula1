@@ -45,6 +45,7 @@ class UsuarioController extends Zend_Controller_Action
             | senha | varchar(30) | NO   |     | NULL    |                |
             +-------+-------------+------+-----+---------+----------------+
             */
+            
             if ($this->getRequest()->isPost()) {
                 
                 $id     = $this->_request->getParam('id'); 
@@ -63,7 +64,28 @@ class UsuarioController extends Zend_Controller_Action
                 
                 if($id != ""){
                     
+                    if(!is_numeric($id)){
+                        echo 'ERRO NAO E NUMERO  ';
+                        exit;
+                    }
+                    
+                    //Default Adpter SQL
+                    $campos = array('*');
+                    $select = $db->select();
+                    $select->from(array('u' => 'usuario'), $campos);
+                    $select->where("id = $id "); 
+                    
+                    if(!$db->fetchRow($select)){
+                        echo "ERRO NAO EXISTE ESTE REGISTRO";
+                        
+                        exit;
+                    }
+                    
+                    //UPDATE
+                    $db->update("usuario",$data,"id = $id");
+                    
                 }else{
+                    //INSERT
                     $db->insert("usuario",$data);
                 }
                 
@@ -77,31 +99,48 @@ class UsuarioController extends Zend_Controller_Action
     }
     public function editarAction()
     {
-        $this->view->titulo_pagina = "EDITAR";
-        
-        $id = $this->_request->getParam('id'); 
-        
-        if($id != ""){
-                //Pegar dados do usuario
-                
-                $db = Zend_Db_Table::getDefaultAdapter();
+        try{
             
-                //Default Adpter SQL
-                $campos = array('*');
-                $select = $db->select();
-                $select->from(array('u' => 'usuario'), $campos);
-                $select->where("id = $id ");  
+                $this->view->titulo_pagina = "EDITAR";
 
-                $rows = $db->fetchRow($select);
-                
-                $this->view->id     = $id;
-                $this->view->nome   = $rows['nome'];
-                $this->view->login  = $rows['login'];
-                $this->view->senha  = $rows['senha'];
+                $id = $this->_request->getParam('id'); 
+
+                if($id == ""){
+                    throw new Exception("ID VAZIO","999999999");
+                }
+
+                if($id != ""){
+                        //Pegar dados do usuario
+
+                        $db = Zend_Db_Table::getDefaultAdapter();
+
+                        //Default Adpter SQL
+                        $campos = array('*');
+                        $select = $db->select();
+                        $select->from(array('u' => 'usuario'), $campos);
+                        $select->where("id = $id ");  
+
+                        $rows = $db->fetchRow($select);
+
+                        if(!$rows){
+                            echo "ERRO NENHUM REGISTRO ENCONTRADO";                    
+                            exit;   
+                        }
+
+                        $this->view->id     = $id;
+                        $this->view->nome   = $rows['nome'];
+                        $this->view->login  = $rows['login'];
+                        $this->view->senha  = $rows['senha'];
+                }
+
+                $this->render('cadastrar');
+        
+         }  catch (Exception $e){
+            
+            $this->view->exception = $e;
+            
+            $this->renderScript('/error/erroaula.phtml');
         }
-        
-        $this->render('cadastrar');
-        
     }
     public function excluirAction()
     {
