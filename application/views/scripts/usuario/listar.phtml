@@ -32,11 +32,20 @@
     <h1>Listar Usuário</h1>
     <a href="/usuario/cadastrar">[CADASTRAR]</a> 
     <div id="more-information">
+        <form>
+            <select name="tipo_filtro">
+                <option value="nome"  <?php if($this->tipo_filtro == "nome"){ echo "selected"; }?>>Nome</option>
+                <option value="login" <?php if($this->tipo_filtro == "login"){ echo "selected"; }?>>Login</option>
+            </select>
+            <input type="text" name="busca" size="30">
+            <input type="submit" value="Buscar">
+            
+        </form>
         <table>
             <tr>
                 <td>ID</td>
-                <td>Nome</td>
-                <td>Login</td>
+                <td><a href="/usuario/listar/ordem/nome/ordem_tipo/<?php echo $this->ordem_tipo; ?>">Nome</a></td>
+                <td><a href="/usuario/listar/ordem/login/ordem_tipo/<?php echo $this->ordem_tipo; ?>">Login</a></td>
                 <td>Senha</td>
                 <td>Ação</td>
             </tr>
@@ -52,7 +61,7 @@
                     <td><a href="/usuario/editar/id/<?php echo $aValue['id'];?>">[EDITAR]</a> 
                     <a href="/usuario/excluir/id/<?php echo $aValue['id'];?>">[EXCLUIR]</a></td>
                 </tr>            
-                <?
+                <?php
                 }
             }else{
                 echo "<tr><td colspan='4'>Nenhum registro encontrado.</td></tr>";

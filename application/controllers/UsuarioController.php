@@ -7,19 +7,65 @@ class UsuarioController extends Zend_Controller_Action
     {
         
     }
-    public function listarAction()
+      public function listarAction()
     {
-         // action body
+           // action body
         try{
+            
+            $tipo_filtro             = $this->_request->getParam('tipo_filtro'); 
+            $this->view->tipo_filtro = $tipo_filtro;
+            
+            $busca                   = $this->_request->getParam('busca'); 
+            
+            $ordem                   = $this->_request->getParam('ordem','nome'); 
+            $ordem_tipo              = $this->_request->getParam('ordem_tipo','asc'); 
+          
+            
             $db = Zend_Db_Table::getDefaultAdapter();
-            
-            print "<pre>";
-            
-            //Default Adpter SQL
+             //Default Adpter SQL
             $campos = array('*');
             $select = $db->select();
             $select->from(array('u' => 'usuario'), $campos);
-            $select->order("1 desc");
+            
+           
+            
+            /*
+             * Filtro
+             */
+            if($tipo_filtro == "nome"){
+                $select->where("nome like '%$busca%'");
+            }
+            if($tipo_filtro == "login"){
+                $select->where("login like '%$busca%'");
+            }
+            
+            /*
+             * Ordem
+             */  
+            if($ordem == "nome"){
+                if($ordem_tipo == "asc"){
+                    $select->order("nome asc");                    
+                }
+                if($ordem_tipo == "desc"){
+                    $select->order("nome desc");
+                }
+            }
+            if($ordem == "login"){
+                if($ordem_tipo == "asc"){
+                    $select->order("login asc");
+                }
+                if($ordem_tipo == "desc"){
+                    $select->order("login desc");
+                }
+            }
+            
+            if($ordem_tipo == "asc"){
+                $this->view->ordem_tipo = "desc";
+            }
+            if($ordem_tipo == "desc"){
+                $this->view->ordem_tipo = "asc";
+            }
+            
             
             $rows = $db->fetchAll($select);
             $this->view->usuario = $rows;
@@ -27,7 +73,7 @@ class UsuarioController extends Zend_Controller_Action
         }  catch (Exception $e){
             echo $e->getMessage();
         }
-    }    
+    } 
     public function cadastrarAction()
     {
         try{
