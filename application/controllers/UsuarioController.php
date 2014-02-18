@@ -9,34 +9,41 @@ class UsuarioController extends Zend_Controller_Action
     }
       public function listarAction()
     {
-           // action body
+        // action body
         try{
             
             $tipo_filtro             = $this->_request->getParam('tipo_filtro'); 
             $this->view->tipo_filtro = $tipo_filtro;
             
             $busca                   = $this->_request->getParam('busca'); 
+            $this->view->busca = $busca;
             
             $ordem                   = $this->_request->getParam('ordem','nome'); 
             $ordem_tipo              = $this->_request->getParam('ordem_tipo','asc'); 
           
-            
             $db = Zend_Db_Table::getDefaultAdapter();
-             //Default Adpter SQL
-            $campos = array('*');
+            
+            //Default Adpter SQL
+            $campos = array('u.id',
+                            'u.senha',
+                            'u.login',
+                            'u.nome as nome_func',
+                            'c.nome as nome_cargo');
+            
             $select = $db->select();
             $select->from(array('u' => 'usuario'), $campos);
-            
-           
-            
+            $select->joinInner(array('c' => 'cargo'), "u.id_cargo = c.id_cargo");
+                  
             /*
              * Filtro
              */
+            
             if($tipo_filtro == "nome"){
-                $select->where("nome like '%$busca%'");
+               $select->where("u.nome like '%$busca%'");
             }
+            
             if($tipo_filtro == "login"){
-                $select->where("login like '%$busca%'");
+               $select->where("u.login like '%$busca%'");
             }
             
             /*
@@ -44,18 +51,19 @@ class UsuarioController extends Zend_Controller_Action
              */  
             if($ordem == "nome"){
                 if($ordem_tipo == "asc"){
-                    $select->order("nome asc");                    
+                    $select->order("u.nome asc");
                 }
                 if($ordem_tipo == "desc"){
-                    $select->order("nome desc");
+                    $select->order("u.nome desc");
                 }
             }
+            
             if($ordem == "login"){
                 if($ordem_tipo == "asc"){
-                    $select->order("login asc");
+                    $select->order("u.login asc");
                 }
                 if($ordem_tipo == "desc"){
-                    $select->order("login desc");
+                    $select->order("u.login desc");
                 }
             }
             
@@ -190,10 +198,18 @@ class UsuarioController extends Zend_Controller_Action
     }
     public function excluirAction()
     {
-        // action body
-                
-        $id = $this->_request->getParam('id'); 
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
         
+        $id = $this->_request->getParam('id');     
+        
+        if($id != ""){
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $db->delete("usuario", "id=$id");
+            $this->_helper->redirector('listar');
+        }else{
+            throw new Exception("ID VAZIO","999999999");
+        }
     }
 
 }

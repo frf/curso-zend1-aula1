@@ -37,7 +37,7 @@
                 <option value="nome"  <?php if($this->tipo_filtro == "nome"){ echo "selected"; }?>>Nome</option>
                 <option value="login" <?php if($this->tipo_filtro == "login"){ echo "selected"; }?>>Login</option>
             </select>
-            <input type="text" name="busca" size="30">
+            <input type="text" name="busca" size="30" value="<?php echo $this->busca;?>">
             <input type="submit" value="Buscar">
             
         </form>
@@ -46,6 +46,7 @@
                 <td>ID</td>
                 <td><a href="/usuario/listar/ordem/nome/ordem_tipo/<?php echo $this->ordem_tipo; ?>">Nome</a></td>
                 <td><a href="/usuario/listar/ordem/login/ordem_tipo/<?php echo $this->ordem_tipo; ?>">Login</a></td>
+                <td>Cargo</td>
                 <td>Senha</td>
                 <td>Ação</td>
             </tr>
@@ -55,8 +56,9 @@
                 ?>
                 <tr>
                     <td><?php echo $aValue['id'];?></td>
-                    <td><?php echo $aValue['nome'];?></td>
+                    <td><?php echo $aValue['nome_func'];?></td>
                     <td><?php echo $aValue['login'];?></td>
+                    <td><?php echo $aValue['nome_cargo'];?></td>
                     <td><?php echo $aValue['senha'];?></td>
                     <td><a href="/usuario/editar/id/<?php echo $aValue['id'];?>">[EDITAR]</a> 
                     <a href="/usuario/excluir/id/<?php echo $aValue['id'];?>">[EXCLUIR]</a></td>
