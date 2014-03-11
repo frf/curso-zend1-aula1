@@ -34,7 +34,7 @@
 
     <form action="/usuario/cadastrar"  method="POST">
 
-        <input type="text" name="id" value="<?php echo $this->id; ?>"><br>
+        <input type="hidden" name="id" value="<?php echo $this->id; ?>"><br>
         <label>Nome:</label><input type="text" name="nome" value="<?php echo $this->nome; ?>"><br>
         <label>Login:</label><input type="text" name="login" value="<?php echo $this->login; ?>"><br>
         <label>Senha:</label><input type="password" name="senha" value="<?php echo $this->senha; ?>"><br>

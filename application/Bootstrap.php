@@ -49,7 +49,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $bootstrap->bootstrap('FrontController');
         $front = $bootstrap->getResource('FrontController');
 
-        #$front->registerPlugin(new Base_Plugins_Autenticador());
+        $front->registerPlugin(new Base_Plugins_Autenticador());
+        $front->registerPlugin(new Base_Plugins_Controller());
     }
 
 }

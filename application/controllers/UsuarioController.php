@@ -32,7 +32,7 @@ class UsuarioController extends Zend_Controller_Action
             
             $select = $db->select();
             $select->from(array('u' => 'usuario'), $campos);
-            $select->joinInner(array('c' => 'cargo'), "u.id_cargo = c.id_cargo");
+            $select->joinLeft(array('c' => 'cargo'), "u.id_cargo = c.id_cargo");
                   
             /*
              * Filtro
