@@ -9,7 +9,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
     }
     protected function _initConstante() {
-        define(TITULO_SISTEMA, "Aula 1");
+        define(TITULO_SISTEMA, "Aula 6");
         define(VERSAO, "1.0");
         define(LOG_PATH, TMP_PATH . "/log");
     }
