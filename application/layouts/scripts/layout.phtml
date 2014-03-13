@@ -3,10 +3,10 @@
 <head>  
   <?php echo $this->headMeta(); ?>
   <?php echo $this->headTitle(); ?>
-  <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+  <?php # echo $this->headLink()->appendStylesheet('/css/global.css') ?>
 </head>
 <body>
-        <h1>Layout</h1>
+    <h1>Layout</h1> <?php $aUser = Zend_Auth::getInstance()->getIdentity(); if($aUser) { ?> Olá, <?php echo $aUser['nome']; ?> | <a href="/default/login/sair">SAIR</a> <?php } ?>
         <div style="border: 1px solid red; padding: 30px">
             <?php echo $this->layout()->content; ?>
             </div>
