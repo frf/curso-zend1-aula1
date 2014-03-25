@@ -8,7 +8,7 @@ class Base_Auth_AuthAdapter implements Zend_Auth_Adapter_Interface
 
     public function __construct( $login, $password )
     {
-        $this->login 	= strtoupper($login);
+        $this->login 	= $login;
         $this->password = $password;
         
         $this->oLog = new Base_Util_FileLog();

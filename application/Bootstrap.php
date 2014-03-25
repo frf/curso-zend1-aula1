@@ -12,6 +12,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         define(TITULO_SISTEMA, "Aula 6");
         define(VERSAO, "1.0");
         define(LOG_PATH, TMP_PATH . "/log");
+        define(SESSION_PATH, TMP_PATH . "/session");
+        
+        ini_set('session.save_path', SESSION_PATH);
+        ini_set('session.gc_maxlifetime', 864000);
+        
     }
     protected function _initViews() {
 
@@ -52,6 +57,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $front->registerPlugin(new Base_Plugins_Autenticador());
         $front->registerPlugin(new Base_Plugins_Controller());
+       
     }
 
 }
